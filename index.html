@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لـ ميرنا ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #ff69b4, #ffb6c1, #ff1493, #db2777);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            z-index: 10;
+            max-width: 92%;
+            padding: 45px 30px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(255,105,180,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        h1 { font-size: 2.6rem; margin: 0 0 20px 0; text-shadow: 0 0 15px rgba(255,255,255,0.9); }
+        
+        .message {
+            font-size: 24px;
+            line-height: 1.7;
+            margin: 25px 0;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+        
+        button {
+            padding: 18px 50px;
+            font-size: 26px;
+            margin: 15px 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+        
+        .yes-btn { background: #ff1493; color: white; }
+        .no-btn { background: #ddd; color: #333; }
+        
+        .heart {
+            position: absolute;
+            font-size: 40px;
+            animation: floatHeart linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        @keyframes floatHeart {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+        }
+        
+        .hidden { display: none !important; }
+        
+        input {
+            padding: 14px 20px;
+            font-size: 18px;
+            margin: 12px 0;
+            border-radius: 15px;
+            border: none;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div id="page1" class="container">
+        <h1>حقك عليا يا ميرنا 🥹❤️</h1>
+        <p class="message">حابة تعرفي قد ايه انا مفتقدك و قد ايه انتي وحشتيني؟</p>
+        <button class="yes-btn" onclick="nextPage(2)">أه طبعاً</button>
+        <button class="no-btn" onmouseover="escapeBtn(this)">لا</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="container hidden">
+        <h1>❤️ وحشتيني يا ميرنا ❤️</h1>
+        <p class="message">
+            وحشتيني يا ميرنا لدرجة اني مش قادر اشوف ولا اعرف ولا افكر في حد غيرك ♥️<br><br>
+            مش عايز اضغطك ولا اكون متطفل..<br>
+            بس انتي حقيقي وحشاني أوي
+        </p>
+        <button class="yes-btn" onclick="nextPage(3)">كمل</button>
+        <button class="no-btn" onmouseover="escapeBtn(this)">لا</button>
+    </div>
+
+    <!-- Page 3 -->
+    <div id="page3" class="container hidden">
+        <h1>❤️ يا ميرنا ❤️</h1>
+        <p class="message" style="font-size:23px;">
+            لو حابة تديني فرصة ونتكلم<br>
+            اختاري المعاد اللي يناسبك
+        </p>
+        
+        <input type="date" id="date"><br>
+        <input type="time" id="time"><br>
+        <input type="text" id="place" placeholder="المكان (اختياري)"><br><br>
+        
+        <button class="yes-btn" onclick="sendDate()">أرسل المعاد 💌</button>
+        <button class="no-btn" onmouseover="escapeBtn(this)">مش حابة دلوقتي</button>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = ['❤️','💕','💖','💗','💘','💝'][Math.floor(Math.random()*6)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (7 + Math.random() * 6) + 's';
+            heart.style.opacity = Math.random() * 0.7 + 0.6;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 18000);
+        }
+        setInterval(createHeart, 260);
+
+        function escapeBtn(btn) {
+            const maxX = window.innerWidth - 160;
+            const maxY = window.innerHeight - 100;
+            let x = Math.random() * maxX;
+            let y = Math.random() * maxY;
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function nextPage(n) {
+            document.querySelectorAll('.container').forEach(page => page.classList.add('hidden'));
+            document.getElementById('page' + n).classList.remove('hidden');
+        }
+
+        function sendDate() {
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const place = document.getElementById('place').value.trim() || "لم يحدد";
+            if (!date || !time) {
+                alert("اختاري التاريخ والساعة 🥹");
+                return;
+            }
+            const msg = `يا ميرنا ❤️%0A%0Aاختارت المعاد:%0A%0A📅 التاريخ: ${date}%0A⏰ الساعة: ${time}%0A📍 المكان: ${place}%0A%0Aهكون مستنيكي بفارغ الصبر 😊💕`;
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
